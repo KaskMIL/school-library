@@ -1,11 +1,12 @@
 require './person'
 require './capitalize_Decorator'
 require './trimmer_decorator'
+require './classroom'
+require './student'
 
-person = Person.new(22, 'maximilianus')
-capitalize_person = CapitalizeDecorator.new(person)
-trim_person = TrimmerDecorator.new(capitalize_person)
-
-puts person.correct_name
-puts capitalize_person.correct_name
-puts trim_person.correct_name
+math = Classroom.new('Algebra')
+stud = Student.new('math', 18, 'Tom')
+puts math.students.length
+math.add_student(stud)
+puts math.students.length
+puts stud.classroom.label
