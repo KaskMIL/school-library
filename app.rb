@@ -1,55 +1,48 @@
-require './student'
-require './teacher'
-require './book'
-require './rental'
-
-class App
-  attr_accessor :book_list, :people_list, :rental_list
-
-  def initialize
-    @book_list = []
-    @people_list = []
-    @rental_list = []
+module App
+  def list_of_books(books_list)
+    if books_list.empty?
+      puts 'The Book\'s list is empty'
+      puts '------------------------------'
+    else
+      books_list.map do |book|
+        puts "Title: #{book.title} - Author: #{book.author}"
+        puts '------------------------------'
+      end
+    end
   end
 
-  def create_student(classroom, age, name = 'Unknown', parent_permission: true)
-    people_list.push(Student.new(classroom, age, name, parent_permission: parent_permission))
+  def list_of_people(people_list)
+    if people_list.empty?
+      puts 'People\'s list is empty'
+      puts '------------------------------'
+    else
+      people_list.map do |person|
+        puts "Name: #{person.name} - ID: #{person.id} - Age: #{person.age}"
+        puts '------------------------------'
+      end
+    end
   end
 
-  def create_teacher(specialization, age, name)
-    people_list.push(Teacher.new(specialization, age, name))
+  def list_of_rentals(rental_list)
+    if rental_list.empty?
+      puts 'The Rental\'s list is empty'
+      puts '------------------------------'
+    else
+      rental_list.map do |rent|
+        puts "Date: #{date} - Book: #{rent.book.title} - Name: #{rent.person.name}"
+      end
+    end
   end
 
-  def create_book(title, author)
-    @book_list.push(Book.new(title, author))
+  def add_person_list(people_list, person)
+    people_list.push(person)
   end
 
-  def create_rental(date, book, person)
-    @rental_list.push(Rental.new(date, book, person))
+  def add_book_list(books_list, book)
+    books_list.push(book)
   end
 
-  def get_list_by_id(id)
-    rental_list.map { |rent| return rent.book.title unless rent.person.id == id }
+  def add_rental_list(rental_list, rent)
+    rental_list.push(rent)
   end
 end
-
-app = App.new
-
-app.create_student('Math', 18, 'tom', parent_permission: false)
-app.create_teacher('Math', 45, 'Seb')
-
-app.create_book('TLOTR', 'Tolkien')
-app.create_rental('2022-08-25', app.people_list[1], app.book_list[0])
-app.create_book('Foundation', 'Asimov')
-app.create_rental('2022-08-25', app.people_list[1], app.book_list[1])
-app.create_rental('2022-08-25', app.book_list[0], app.people_list[0])
-
-app.people_list.map { |peop| puts "name: #{peop.name}, ID: #{peop.id}"}
-puts 'Select first id'
-id = gets.chomp
-puts app.get_list_by_id(id)
-
-# puts app.people_list[0].name
-# puts app.book_list[0].title
-# puts app.rental_list[0].date
-# puts app.people_list[0].rentals[0].book.author
