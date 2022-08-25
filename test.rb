@@ -3,10 +3,18 @@ require './capitalize_Decorator'
 require './trimmer_decorator'
 require './classroom'
 require './student'
+require './book'
+require './rental'
 
 math = Classroom.new('Algebra')
-stud = Student.new('math', 18, 'Tom')
+stud = Student.new(math, 18, 'Tom')
+book = Book.new('The Lord of the Rings', 'JRR Tolkien')
+rent = Rental.new('2022-08-24', book, stud)
+
 puts math.students.length
 math.add_student(stud)
 puts math.students.length
 puts stud.classroom.label
+puts rent.date
+puts stud.rentals[0].book.title
+puts book.rentals[0].person.name
