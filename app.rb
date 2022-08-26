@@ -13,10 +13,12 @@ module App
 
   def list_of_people(people_list)
     if people_list.empty?
+      puts '------------------------------'
       puts 'People\'s list is empty'
       puts '------------------------------'
     else
       people_list.map do |person|
+        puts '------------------------------'
         puts "Name: #{person.name} - ID: #{person.id} - Age: #{person.age}"
         puts '------------------------------'
       end
@@ -25,11 +27,14 @@ module App
 
   def list_of_rentals(rental_list)
     if rental_list.empty?
+      puts '------------------------------'
       puts 'The Rental\'s list is empty'
       puts '------------------------------'
     else
       rental_list.map do |rent|
+        puts '------------------------------'
         puts "Date: #{date} - Book: #{rent.book.title} - Name: #{rent.person.name}"
+        puts '------------------------------'
       end
     end
   end
