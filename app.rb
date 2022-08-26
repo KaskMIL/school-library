@@ -1,5 +1,6 @@
 module App
   def list_of_books(books_list)
+    puts 'List of Books:'
     if books_list.empty?
       puts '---------------------------------------------'
       puts 'The Book\'s list is empty'
@@ -14,6 +15,7 @@ module App
   end
 
   def list_of_people(people_list)
+    puts 'List of Persons:'
     if people_list.empty?
       puts '---------------------------------------------'
       puts 'People\'s list is empty'
@@ -59,9 +61,15 @@ module App
 
   def add_book_list(books_list, book)
     books_list.push(book)
+    puts '---------------------------------------------'
+    puts 'The Book was created successfully!'
+    puts '---------------------------------------------'
   end
 
   def add_rental_list(rental_list, rent)
     rental_list.push(rent)
+    puts '---------------------------------------------'
+    puts 'The Rental was created successfully!'
+    puts '---------------------------------------------'
   end
 end

@@ -29,11 +29,9 @@ class Main
   def show_list(user_choice)
     case user_choice
     when '1'
-      puts 'List of Books:'
       list_of_books(@books_list)
       main
     when '2'
-      puts 'List of Persons:'
       list_of_people(@people_list)
       main
     when '7'
@@ -76,23 +74,21 @@ class Main
   def add_student
     puts 'In order to create a new student, we need some information first...'
     puts 'Age?'
-    stud_age = gets.chomp
+    age = gets.chomp
     puts 'name?'
-    stud_name = gets.chomp
+    name = gets.chomp
     puts 'Has parent permission? [y/n] (Lowercase)'
     stud_permission = gets.chomp
-    case stud_permission
-    when 'y'
-      add_person_list(@people_list, Student.new('none', stud_age, stud_name))
-      puts '---------------------------------------------'
-      puts ' The Student was created successfully!'
-      puts '---------------------------------------------'
-    when 'n'
-      add_person_list(@people_list, Student.new('none', stud_age, stud_name, parent_permission: true))
-      puts '---------------------------------------------'
-      puts ' The Student was created successfully!'
-      puts '---------------------------------------------'
-    end
+    add_person_list(@people_list, Student.new('none', age, name, parent_permission: permission(stud_permission)))
+    puts '---------------------------------------------'
+    puts ' The Student was created successfully!'
+    puts '---------------------------------------------'
+  end
+
+  def permission(permission)
+    return true if permission == 'y'
+
+    false
   end
 
   def add_teacher
@@ -116,19 +112,12 @@ class Main
     puts 'Who is the Author?'
     book_author = gets.chomp
     add_book_list(@books_list, Book.new(book_title, book_author))
-    puts '---------------------------------------------'
-    puts 'The Book was created successfully!'
-    puts '---------------------------------------------'
   end
 
   def add_rental
-    if @books_list.empty?
+    if @books_list.empty? || @people_list.empty?
       puts '---------------------------------------------'
-      puts 'The list of Books is empty!'
-      puts '---------------------------------------------'
-    elsif @people_list.empty?
-      puts '---------------------------------------------'
-      puts 'The list of People is empty!'
+      puts 'The list of Book/People\'s is empty!'
       puts '---------------------------------------------'
     else
       select_book
@@ -138,21 +127,13 @@ class Main
       puts 'Date? (format yyyy-mm-dd)'
       date = gets.chomp
       add_rental_list(@rental_list, Rental.new(date, @books_list[book_idx], @people_list[person_idx]))
-      rental_created
     end
-  end
-
-  def rental_created
-    puts '---------------------------------------------'
-    puts 'The Rental was created successfully!'
-    puts '---------------------------------------------'
   end
 
   def select_book
     puts 'In order to create a New Rental, we need some information first...'
     puts 'Select a Book:'
     @books_list.each_with_index do |book, i|
-      puts '---------------------------------------------'
       puts "[#{i}] #{book.title} - #{book.author}"
       puts '---------------------------------------------'
     end
@@ -161,7 +142,6 @@ class Main
   def select_person
     puts 'Select a Person:'
     @people_list.each_with_index do |person, i|
-      puts '---------------------------------------------'
       puts "[#{i}] #{person.name} - #{person.id}"
       puts '---------------------------------------------'
     end
