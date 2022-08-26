@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require './person'
 require './capitalize_Decorator'
 require './trimmer_decorator'
