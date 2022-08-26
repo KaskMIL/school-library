@@ -49,6 +49,9 @@ class Main
     when '4'
       add_book
       main
+    when '5'
+      add_rental
+      main
     end
   end
 
@@ -108,6 +111,46 @@ class Main
     puts 'The Book was created successfully!'
     puts '---------------------------------------------'
     main
+  end
+
+  def add_rental
+    if @books_list.empty?
+      puts '---------------------------------------------'
+      puts 'The list of Books is empty!'
+      puts '---------------------------------------------'
+    elsif @people_list.empty?
+      puts '---------------------------------------------'
+      puts 'The list of People is empty!'
+      puts '---------------------------------------------'
+    else
+      select_book
+      book_idx = gets.chomp.to_i
+      select_person
+      person_idx = gets.chomp.to_i
+      puts 'Date? (format yyyy-mm-dd)'
+      date = gets.chomp
+      add_rental_list(@rental_list, Rental.new(date, @books_list[book_idx], @people_list[person_idx]))
+      puts 'The Rental was created successfully!'
+    end
+  end
+
+  def select_book
+    puts 'In order to create a New Rental, we need some information first...'
+    puts 'Select a Book:'
+    @books_list.each_with_index do |book, i|
+      puts '---------------------------------------------'
+      puts "[#{i}] #{book.title} - #{book.author}"
+      puts '---------------------------------------------'
+    end
+  end
+
+  def select_person
+    puts 'Select a Person:'
+    @people_list.each_with_index do |person, i|
+      puts '---------------------------------------------'
+      puts "[#{i}] #{person.name} - #{person.id}"
+      puts '---------------------------------------------'
+    end
   end
 end
 
