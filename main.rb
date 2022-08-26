@@ -1,6 +1,8 @@
 require './app'
 require './student'
 require './teacher'
+require './book'
+require './rental'
 
 class Main
   include App
@@ -43,6 +45,10 @@ class Main
     case user_choice
     when '3'
       add_person
+      main
+    when '4'
+      add_book
+      main
     end
   end
 
@@ -71,10 +77,8 @@ class Main
       puts '------------------------------'
       puts ' The Student was created successfully!'
       puts '------------------------------'
-      main
     when 'n'
       add_person_list(@people_list, Student.new('none', stud_age, stud_name, parent_permission: true))
-      main
     end
   end
 
@@ -87,9 +91,22 @@ class Main
     puts 'Specialization?'
     teach_spec = gets.chomp
     add_person_list(@people_list, Teacher.new(teach_spec, teach_age, teach_name))
-    puts '------------------------------'
+    puts '---------------------------------------------'
     puts 'The Teacher was created successfully!'
-    puts '------------------------------'
+    puts '---------------------------------------------'
+    main
+  end
+
+  def add_book
+    puts 'In order to create a new Book we need some information first...'
+    puts 'What is the title of the Book?'
+    book_title = gets.chomp
+    puts 'Who is the Author?'
+    book_author = gets.chomp
+    add_book_list(@books_list, Book.new(book_title, book_author))
+    puts '---------------------------------------------'
+    puts 'The Book was created successfully!'
+    puts '---------------------------------------------'
     main
   end
 end

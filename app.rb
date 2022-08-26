@@ -1,40 +1,42 @@
 module App
   def list_of_books(books_list)
     if books_list.empty?
+      puts '---------------------------------------------'
       puts 'The Book\'s list is empty'
-      puts '------------------------------'
+      puts '---------------------------------------------'
     else
       books_list.map do |book|
+        puts '---------------------------------------------'
         puts "Title: #{book.title} - Author: #{book.author}"
-        puts '------------------------------'
+        puts '---------------------------------------------'
       end
     end
   end
 
   def list_of_people(people_list)
     if people_list.empty?
-      puts '------------------------------'
+      puts '---------------------------------------------'
       puts 'People\'s list is empty'
-      puts '------------------------------'
+      puts '---------------------------------------------'
     else
       people_list.map do |person|
-        puts '------------------------------'
+        puts '---------------------------------------------'
         puts "Name: #{person.name} - ID: #{person.id} - Age: #{person.age}"
-        puts '------------------------------'
+        puts '---------------------------------------------'
       end
     end
   end
 
   def list_of_rentals(rental_list)
     if rental_list.empty?
-      puts '------------------------------'
+      puts '---------------------------------------------'
       puts 'The Rental\'s list is empty'
-      puts '------------------------------'
+      puts '---------------------------------------------'
     else
       rental_list.map do |rent|
-        puts '------------------------------'
+        puts '---------------------------------------------'
         puts "Date: #{date} - Book: #{rent.book.title} - Name: #{rent.person.name}"
-        puts '------------------------------'
+        puts '---------------------------------------------'
       end
     end
   end
