@@ -111,7 +111,7 @@ class Main
     book_title = gets.chomp
     puts 'Who is the Author?'
     book_author = gets.chomp
-    add_book_list(@books_list, Book.new(book_title, book_author))
+    add_book_list(@people_list, Book.new(book_title, book_author))
   end
 
   def add_rental
