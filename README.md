@@ -2,7 +2,7 @@
 
 # School Library
 
-> School library is a console app that let the userto manage a School Library Database by performing tasks such ass Adding a new Person (Student or Teacher), updating and deleting books'rental.
+> School library is a console app that let the user to manage a School Library Database by performing tasks such ass Adding a new Person (Student or Teacher), updating books'rental, and show the rentals by person ID.
 
 
 ## Built With
@@ -18,7 +18,12 @@
 
 - git clone https://github.com/KaskMIL/school-library
 - cd school-library
-- Opent with your editor.
+- Open it with your text editor.
+
+## Usage
+
+- cd school-library
+- Enter the command ruby main.rb
 
 ## Authors
 
