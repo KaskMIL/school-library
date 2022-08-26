@@ -41,6 +41,18 @@ module App
     end
   end
 
+  def filter_by_id(rental_list, id)
+    rental_list.each do |rent|
+      next if rent.person.id != id
+
+      puts '---------------------------------------------'
+      puts "Date: #{rent.date}"
+      puts "Title: #{rent.book.title}"
+      puts "Author: #{rent.book.author}"
+      puts '---------------------------------------------'
+    end
+  end
+
   def add_person_list(people_list, person)
     people_list.push(person)
   end

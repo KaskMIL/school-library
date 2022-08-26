@@ -14,7 +14,7 @@ class Main
   end
 
   def main
-    puts 'Please choose an option:'
+    puts 'Please choose an option by entering a number:'
     puts '[1] List of all Books'
     puts '[2] List of all People'
     puts '[3] Create a Person'
@@ -29,13 +29,17 @@ class Main
   def show_list(user_choice)
     case user_choice
     when '1'
+      puts 'List of Books:'
       list_of_books(@books_list)
       main
     when '2'
+      puts 'List of Persons:'
       list_of_people(@people_list)
       main
     when '7'
-      puts 'Good bye'
+      puts '---------------------------------------------'
+      puts 'Good bye!'
+      puts '---------------------------------------------'
     else
       add_to_list(user_choice)
     end
@@ -51,6 +55,9 @@ class Main
       main
     when '5'
       add_rental
+      main
+    when '6'
+      filter_rental
       main
     end
   end
@@ -77,11 +84,14 @@ class Main
     case stud_permission
     when 'y'
       add_person_list(@people_list, Student.new('none', stud_age, stud_name))
-      puts '------------------------------'
+      puts '---------------------------------------------'
       puts ' The Student was created successfully!'
-      puts '------------------------------'
+      puts '---------------------------------------------'
     when 'n'
       add_person_list(@people_list, Student.new('none', stud_age, stud_name, parent_permission: true))
+      puts '---------------------------------------------'
+      puts ' The Student was created successfully!'
+      puts '---------------------------------------------'
     end
   end
 
@@ -97,7 +107,6 @@ class Main
     puts '---------------------------------------------'
     puts 'The Teacher was created successfully!'
     puts '---------------------------------------------'
-    main
   end
 
   def add_book
@@ -110,7 +119,6 @@ class Main
     puts '---------------------------------------------'
     puts 'The Book was created successfully!'
     puts '---------------------------------------------'
-    main
   end
 
   def add_rental
@@ -130,8 +138,14 @@ class Main
       puts 'Date? (format yyyy-mm-dd)'
       date = gets.chomp
       add_rental_list(@rental_list, Rental.new(date, @books_list[book_idx], @people_list[person_idx]))
-      puts 'The Rental was created successfully!'
+      rental_created
     end
+  end
+
+  def rental_created
+    puts '---------------------------------------------'
+    puts 'The Rental was created successfully!'
+    puts '---------------------------------------------'
   end
 
   def select_book
@@ -152,8 +166,32 @@ class Main
       puts '---------------------------------------------'
     end
   end
+
+  def filter_rental
+    if @rental_list.empty? || @people_list.empty?
+      puts 'List of Rentals:'
+      puts '---------------------------------------------'
+      puts 'Nothing to show'
+      puts '---------------------------------------------'
+    else
+      puts 'Choose Person entering his ID:'
+      @people_list.each_with_index { |person, index| puts "[#{index}] #{person.name} - ID: #{person.id}" }
+      person_id = gets.chomp.to_i
+      puts 'List of Rentals:'
+      filter_by_id(@rental_list, person_id)
+    end
+  end
+
+  def welcome
+    puts
+    puts '---------------------------------------------'
+    puts 'Welcome to School Library App!'
+    puts '---------------------------------------------'
+    puts
+  end
 end
 
 main = Main.new
 
+main.welcome
 main.main
