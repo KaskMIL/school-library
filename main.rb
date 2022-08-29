@@ -3,9 +3,11 @@ require './student'
 require './teacher'
 require './book'
 require './rental'
+require './person_options'
 
 class Main
   include App
+  include PersonOptions
 
   def initialize
     @people_list = []
@@ -31,6 +33,11 @@ class Main
     when '1'
       list_of_books(@books_list)
       main
+    when '3'
+      puts 'Do you want to create a Student [1] or a Teacher [2]'
+      person_choice = gets.chomp
+      add_person(person_choice, @people_list)
+      main
     when '2'
       list_of_people(@people_list)
       main
@@ -45,9 +52,6 @@ class Main
 
   def add_to_list(user_choice)
     case user_choice
-    when '3'
-      add_person
-      main
     when '4'
       add_book
       main
@@ -58,51 +62,6 @@ class Main
       filter_rental
       main
     end
-  end
-
-  def add_person
-    puts 'Do you want to create a Student [1] or a Teacher [2]'
-    person_choice = gets.chomp
-    case person_choice
-    when '1'
-      add_student
-    when '2'
-      add_teacher
-    end
-  end
-
-  def add_student
-    puts 'In order to create a new student, we need some information first...'
-    puts 'Age?'
-    age = gets.chomp
-    puts 'name?'
-    name = gets.chomp
-    puts 'Has parent permission? [y/n] (Lowercase)'
-    stud_permission = gets.chomp
-    add_person_list(@people_list, Student.new('none', age, name, parent_permission: permission(stud_permission)))
-    puts '---------------------------------------------'
-    puts ' The Student was created successfully!'
-    puts '---------------------------------------------'
-  end
-
-  def permission(permission)
-    return true if permission == 'y'
-
-    false
-  end
-
-  def add_teacher
-    puts 'In order to create a new Teacher, we need some information first...'
-    puts 'Name?'
-    teach_name = gets.chomp
-    puts 'Age?'
-    teach_age = gets.chomp
-    puts 'Specialization?'
-    teach_spec = gets.chomp
-    add_person_list(@people_list, Teacher.new(teach_spec, teach_age, teach_name))
-    puts '---------------------------------------------'
-    puts 'The Teacher was created successfully!'
-    puts '---------------------------------------------'
   end
 
   def add_book
