@@ -1,7 +1,4 @@
 require './app'
-require './student'
-require './teacher'
-require './book'
 require './rental'
 require './person_options'
 require './book_option'
