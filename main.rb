@@ -1,11 +1,12 @@
 require './app'
-require './student'
-require './teacher'
-require './book'
 require './rental'
+require './person_options'
+require './book_option'
 
 class Main
   include App
+  include PersonOptions
+  include BookOption
 
   def initialize
     @people_list = []
@@ -34,6 +35,12 @@ class Main
     when '2'
       list_of_people(@people_list)
       main
+    when '3'
+      add_person(@people_list)
+      main
+    when '4'
+      add_book(@books_list)
+      main
     when '7'
       puts '---------------------------------------------'
       puts 'Good bye!'
@@ -45,12 +52,6 @@ class Main
 
   def add_to_list(user_choice)
     case user_choice
-    when '3'
-      add_person
-      main
-    when '4'
-      add_book
-      main
     when '5'
       add_rental
       main
@@ -58,60 +59,6 @@ class Main
       filter_rental
       main
     end
-  end
-
-  def add_person
-    puts 'Do you want to create a Student [1] or a Teacher [2]'
-    person_choice = gets.chomp
-    case person_choice
-    when '1'
-      add_student
-    when '2'
-      add_teacher
-    end
-  end
-
-  def add_student
-    puts 'In order to create a new student, we need some information first...'
-    puts 'Age?'
-    age = gets.chomp
-    puts 'name?'
-    name = gets.chomp
-    puts 'Has parent permission? [y/n] (Lowercase)'
-    stud_permission = gets.chomp
-    add_person_list(@people_list, Student.new('none', age, name, parent_permission: permission(stud_permission)))
-    puts '---------------------------------------------'
-    puts ' The Student was created successfully!'
-    puts '---------------------------------------------'
-  end
-
-  def permission(permission)
-    return true if permission == 'y'
-
-    false
-  end
-
-  def add_teacher
-    puts 'In order to create a new Teacher, we need some information first...'
-    puts 'Name?'
-    teach_name = gets.chomp
-    puts 'Age?'
-    teach_age = gets.chomp
-    puts 'Specialization?'
-    teach_spec = gets.chomp
-    add_person_list(@people_list, Teacher.new(teach_spec, teach_age, teach_name))
-    puts '---------------------------------------------'
-    puts 'The Teacher was created successfully!'
-    puts '---------------------------------------------'
-  end
-
-  def add_book
-    puts 'In order to create a new Book we need some information first...'
-    puts 'What is the title of the Book?'
-    book_title = gets.chomp
-    puts 'Who is the Author?'
-    book_author = gets.chomp
-    add_book_list(@books_list, Book.new(book_title, book_author))
   end
 
   def add_rental
