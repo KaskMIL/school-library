@@ -4,10 +4,12 @@ require './teacher'
 require './book'
 require './rental'
 require './person_options'
+require './book_option'
 
 class Main
   include App
   include PersonOptions
+  include BookOption
 
   def initialize
     @people_list = []
@@ -39,6 +41,9 @@ class Main
     when '3'
       add_person(@people_list)
       main
+    when '4'
+      add_book(@books_list)
+      main
     when '7'
       puts '---------------------------------------------'
       puts 'Good bye!'
@@ -50,9 +55,6 @@ class Main
 
   def add_to_list(user_choice)
     case user_choice
-    when '4'
-      add_book
-      main
     when '5'
       add_rental
       main
@@ -60,15 +62,6 @@ class Main
       filter_rental
       main
     end
-  end
-
-  def add_book
-    puts 'In order to create a new Book we need some information first...'
-    puts 'What is the title of the Book?'
-    book_title = gets.chomp
-    puts 'Who is the Author?'
-    book_author = gets.chomp
-    add_book_list(@books_list, Book.new(book_title, book_author))
   end
 
   def add_rental
