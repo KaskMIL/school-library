@@ -2,11 +2,13 @@ require './app'
 require './rental'
 require './person_options'
 require './book_option'
+require './rental_option'
 
 class Main
   include App
   include PersonOptions
   include BookOption
+  include RentalOption
 
   def initialize
     @people_list = []
@@ -53,7 +55,7 @@ class Main
   def add_to_list(user_choice)
     case user_choice
     when '5'
-      add_rental
+      add_rental(@books_list, @people_list, @rental_list)
       main
     when '6'
       filter_rental
@@ -61,38 +63,38 @@ class Main
     end
   end
 
-  def add_rental
-    if @books_list.empty? || @people_list.empty?
-      puts '---------------------------------------------'
-      puts 'The list of Book/People\'s is empty!'
-      puts '---------------------------------------------'
-    else
-      select_book
-      book_idx = gets.chomp.to_i
-      select_person
-      person_idx = gets.chomp.to_i
-      puts 'Date? (format yyyy-mm-dd)'
-      date = gets.chomp
-      add_rental_list(@rental_list, Rental.new(date, @books_list[book_idx], @people_list[person_idx]))
-    end
-  end
+  # def add_rental
+  #   if @books_list.empty? || @people_list.empty?
+  #     puts '---------------------------------------------'
+  #     puts 'The list of Book/People\'s is empty!'
+  #     puts '---------------------------------------------'
+  #   else
+  #     select_book
+  #     book_idx = gets.chomp.to_i
+  #     select_person
+  #     person_idx = gets.chomp.to_i
+  #     puts 'Date? (format yyyy-mm-dd)'
+  #     date = gets.chomp
+  #     add_rental_list(@rental_list, Rental.new(date, @books_list[book_idx], @people_list[person_idx]))
+  #   end
+  # end
 
-  def select_book
-    puts 'In order to create a New Rental, we need some information first...'
-    puts 'Select a Book:'
-    @books_list.each_with_index do |book, i|
-      puts "[#{i}] #{book.title} - #{book.author}"
-      puts '---------------------------------------------'
-    end
-  end
+  # def select_book
+  #   puts 'In order to create a New Rental, we need some information first...'
+  #   puts 'Select a Book:'
+  #   @books_list.each_with_index do |book, i|
+  #     puts "[#{i}] #{book.title} - #{book.author}"
+  #     puts '---------------------------------------------'
+  #   end
+  # end
 
-  def select_person
-    puts 'Select a Person:'
-    @people_list.each_with_index do |person, i|
-      puts "[#{i}] #{person.name} - #{person.id}"
-      puts '---------------------------------------------'
-    end
-  end
+  # def select_person
+  #   puts 'Select a Person:'
+  #   @people_list.each_with_index do |person, i|
+  #     puts "[#{i}] #{person.name} - #{person.id}"
+  #     puts '---------------------------------------------'
+  #   end
+  # end
 
   def filter_rental
     if @rental_list.empty? || @people_list.empty?
