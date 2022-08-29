@@ -33,13 +33,11 @@ class Main
     when '1'
       list_of_books(@books_list)
       main
-    when '3'
-      puts 'Do you want to create a Student [1] or a Teacher [2]'
-      person_choice = gets.chomp
-      add_person(person_choice, @people_list)
-      main
     when '2'
       list_of_people(@people_list)
+      main
+    when '3'
+      add_person(@people_list)
       main
     when '7'
       puts '---------------------------------------------'

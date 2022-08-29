@@ -5,7 +5,9 @@ module PersonOptions
   include StudentOptions
   include TeacherOptions
 
-  def add_person(person_choice, persons_list)
+  def add_person(persons_list)
+    puts 'Do you want to create a Student [1] or a Teacher [2]'
+    person_choice = gets.chomp
     case person_choice
     when '1'
       add_student(persons_list)
