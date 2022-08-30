@@ -34,6 +34,18 @@
 - Twitter: [@TomMilanesi](https://twitter.com/TomasMilanesi)
 - LinkedIn: [Tomas Milanesi](https://www.linkedin.com/in/tomas-milanesi-3427bb185/)
 
+👤 **Waqas Ahmad**
+
+- GitHub: [@githubhandle](https://github.com/waqaskanju)
+- Twitter: [@twitterhandle](https://twitter.com/waqaskanju)
+- LinkedIn: [@LinkedIn](https://linkedin.com/in/waqaskanju)
+
+👤 **Owoeye Olaoluwa (Olamarx)**
+
+- GitHub: [@githubhandle](https://github.com/Olamarx)
+- Twitter: [@twitterhandle](https://twitter.com/Owoeye0laoluwa)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/olaoluwa-owoeye-617702162/)
+- Facebook: [Facebook](https://web.facebook.com/olaoluwa.owoeye.39)
 
 ## 🤝 Contributing
 

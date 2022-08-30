@@ -1,0 +1,75 @@
+require './app'
+require './rental'
+require './person_options'
+require './book_option'
+require './rental_option'
+require './rental_list'
+
+class Main
+  include App
+  include PersonOptions
+  include BookOption
+  include RentalOption
+  include RentalList
+
+  def initialize
+    @people_list = []
+    @books_list = []
+    @rental_list = []
+  end
+
+  def main
+    puts 'Please choose an option by entering a number:'
+    puts '[1] List of all Books'
+    puts '[2] List of all People'
+    puts '[3] Create a Person'
+    puts '[4] Create a Book'
+    puts '[5] Create a Rental'
+    puts '[6] List of all Rentals by Person\'s ID'
+    puts '[7] Exit'
+    user_choice = gets.chomp
+    show_list(user_choice)
+  end
+
+  def show_list(user_choice)
+    case user_choice
+    when '1'
+      list_of_books(@books_list)
+      main
+    when '2'
+      list_of_people(@people_list)
+      main
+    when '6'
+      show_rental(@rental_list, @people_list)
+      main
+    when '7'
+      puts '---------------------------------------------'
+      puts 'Good bye!'
+      puts '---------------------------------------------'
+    else
+      add_to_list(user_choice)
+    end
+  end
+
+  def add_to_list(user_choice)
+    case user_choice
+    when '3'
+      add_person(@people_list)
+      main
+    when '4'
+      add_book(@books_list)
+      main
+    when '5'
+      add_rental(@books_list, @people_list, @rental_list)
+      main
+    end
+  end
+
+  def welcome
+    puts
+    puts '---------------------------------------------'
+    puts 'Welcome to School Library App!'
+    puts '---------------------------------------------'
+    puts
+  end
+end
