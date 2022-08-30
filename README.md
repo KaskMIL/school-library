@@ -34,6 +34,12 @@
 - Twitter: [@TomMilanesi](https://twitter.com/TomasMilanesi)
 - LinkedIn: [Tomas Milanesi](https://www.linkedin.com/in/tomas-milanesi-3427bb185/)
 
+👤 **Waqas Ahmad**
+
+- GitHub: [@githubhandle](https://github.com/waqaskanju)
+- Twitter: [@twitterhandle](https://twitter.com/waqaskanju)
+- LinkedIn: [@LinkedIn](https://linkedin.com/in/waqaskanju)
+
 
 ## 🤝 Contributing
 
