@@ -13,7 +13,6 @@ module PreserveData
       rental_json = JSON.generate(rental_data)
       File.write('data/rentals.json', "#{rental_json}\n", mode: 'a')
     end
-    puts 'List saved successfully!'
   end
 
   def save_persons(persons_list)
@@ -23,7 +22,6 @@ module PreserveData
       person_json = JSON.generate(person_data)
       File.write('data/persons.json', "#{person_json}\n", mode: 'a')
     end
-    puts 'Person list saved succsessfully'
   end
 
   def save_books(books_list)
@@ -33,7 +31,6 @@ module PreserveData
       book_json = JSON.generate(book_data)
       File.write('data/books.json', "#{book_json}\n", mode: 'a')
     end
-    puts 'Book list saved successfully'
   end
 
   def read_persons
@@ -70,7 +67,18 @@ module PreserveData
     return [] unless File.exist?('data/rentals.json') && !File.zero?('data/rentals.json')
 
     rental_list = []
-    File.foreach('data/rentals.json') { |rental| rental_list.push(JSON.parse(rental)) }
+    File.foreach('data/rentals.json') do |rental_json|
+      rental_data = JSON.parse(rental_json)
+      book = Book.new(rental_data[1][0], rental_data[1][1])
+      case rental_data[2][0]
+      when 'Student'
+        stud = Student.new('None', rental_data[2][1], rental_data[2][2], parent_permission: rental_data[2][3])
+        rental_list.push(Rental.new(rental_data[0], book, stud))
+      when 'Teacher'
+        teach = Teacher.new('None', rental_data[2][1], rental_data[2][2])
+        rental_list.push(Rental.new(rental_data[0], book, teach))
+      end
+    end
     rental_list
   end
 end
