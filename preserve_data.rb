@@ -1,6 +1,7 @@
 require 'json'
 require './student'
 require './teacher'
+require './book'
 
 module PreserveData
   def save_rental(rental_list)
@@ -22,9 +23,11 @@ module PreserveData
   end
 
   def save_books(books_list)
+    File.open('data/books.json', mode: 'w')
     books_list.each do |book|
-      data_book = JSON.generate(book)
-      File.write('data/books.json', "#{data_book}\n", mode: 'w')
+      book_data = [book.title, book.author]
+      book_json = JSON.generate(book_data)
+      File.write('data/books.json', "#{book_json}\n", mode: 'a')
     end
     puts 'Book list saved successfully'
   end
@@ -51,7 +54,11 @@ module PreserveData
     return [] unless File.exist?('data/books.json') && !File.zero?('data/books.json')
 
     books_list = []
-    File.foreach('data/books.json') { |book| books_list.push(JSON.parse(book)) }
+    File.foreach('data/books.json') do |book_json|
+      book = JSON.parse(book_json)
+      new_book = Book.new(book[0], book[1])
+      books_list.push(new_book)
+    end
     books_list
   end
 
