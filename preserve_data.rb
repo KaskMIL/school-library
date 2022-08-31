@@ -65,10 +65,10 @@ module PreserveData
   end
 
   def read_rental
-    puts [] unless File.exist?('data/rentals.json') && !File.zero?('data/rentals.json')
-
-    # rental_list = []
-    # File.foreach('data/rentals.json') { |rental| rental_list.push(JSON.parse(rental)) }
-    # rental_list
+    return [] unless File.exist?('data/rentals.json') && !File.zero?('data/rentals.json')
+    File.foreach('data/rentals.json') do |rental_json|
+      rental = JSON.parse(rental_json)
+      puts "Name :"  + rental[0] + " Book :"  + rental[1] + " Date :"  + rental[2]
+    end
   end
 end

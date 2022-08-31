@@ -27,7 +27,7 @@ class Main
     puts '[3] Create a Person'
     puts '[4] Create a Book'
     puts '[5] Create a Rental'
-    puts '[6] List of all Rentals by Person\'s ID'
+    puts '[6] List of all Rentals '
     puts '[7] Exit'
     user_choice = gets.chomp
     show_list(user_choice)
