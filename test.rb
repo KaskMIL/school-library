@@ -1,11 +1,8 @@
-require 'json'
+require './student'
+require './teacher'
 
-arr = [1,2,3,4,5,6,7]
+stud = Student.new('math', 12, 'tom')
+teach = Teacher.new('math', 32, 'sam')
 
-to_jason = JSON.generate(arr)
-
-File.open('text.txt', 'a') do |file|
-  file.write(to_jason)
-end
-
-puts to_jason
+puts stud.is_a?(Student)
+puts teach.class

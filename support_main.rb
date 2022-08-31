@@ -4,6 +4,7 @@ require './person_options'
 require './book_option'
 require './rental_option'
 require './rental_list'
+require './preserve_data'
 
 class Main
   include App
@@ -11,11 +12,12 @@ class Main
   include BookOption
   include RentalOption
   include RentalList
+  include PreserveData
 
   def initialize
-    @people_list = []
-    @books_list = []
-    @rental_list = []
+    @people_list = read_persons
+    @books_list = read_books
+    @rental_list = read_rental
   end
 
   def main
@@ -43,6 +45,9 @@ class Main
       show_rental(@rental_list, @people_list)
       main
     when '7'
+      save_books(@books_list)
+      save_persons(@people_list)
+      save_rental(@rental_list)
       puts '---------------------------------------------'
       puts 'Good bye!'
       puts '---------------------------------------------'
