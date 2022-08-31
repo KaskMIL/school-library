@@ -5,7 +5,7 @@ require './book'
 
 module PreserveData
   def save_rental(rental_list)
-    File.write('data/rentals.json', "", mode: 'w')
+    File.write('data/rentals.json', '', mode: 'w')
     rental_list.each do |data|
       array_rental = [data.person.name, data.book.title, data.date]
       data_rental = JSON.generate(array_rental)
@@ -66,9 +66,10 @@ module PreserveData
 
   def read_rental
     return [] unless File.exist?('data/rentals.json') && !File.zero?('data/rentals.json')
+
     File.foreach('data/rentals.json') do |rental_json|
       rental = JSON.parse(rental_json)
-      puts "Name :"  + rental[0] + " Book :"  + rental[1] + " Date :"  + rental[2]
+      puts "Name :#{rental[0]} Book :#{rental[1]} Date :#{rental[2]}"
     end
   end
 end
