@@ -5,9 +5,11 @@ require './book'
 
 module PreserveData
   def save_rental(rental_list)
+    File.write('data/rentals.json', "", mode: 'w')
     rental_list.each do |data|
-      data_rental = JSON.generate(data)
-      File.write('data/rentals.json', "#{data_rental}\n", mode: 'w')
+      array_rental = [data.person.name, data.book.title, data.date]
+      data_rental = JSON.generate(array_rental)
+      File.write('data/rentals.json', "#{data_rental}\n", mode: 'a')
     end
     puts 'List saved successfully!'
   end
