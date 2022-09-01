@@ -38,3 +38,18 @@ describe Person do
     end
   end
 end
+
+describe Student do
+  before :each do
+    @student = Student.new('Student', 20, 'Olaoluwa')
+  end
+
+  it 'Should not return a new Student object' do
+    expect(@student).not_to eql Student
+  end
+
+  # it 'Should not return a new Student object' do
+  #   student = Student.new
+  #   expect(student).to eq Student
+  # end
+end
