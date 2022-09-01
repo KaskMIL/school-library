@@ -5,13 +5,14 @@ require './book'
 
 module PreserveData
   def save_rental(rental_list)
-    File.write('data/rentals.json', '', mode: 'w')
+    File.open('data/rentals.json', mode: 'w')
     rental_list.each do |data|
-      array_rental = [data.person.name, data.book.title, data.date]
-      data_rental = JSON.generate(array_rental)
-      File.write('data/rentals.json', "#{data_rental}\n", mode: 'a')
+      rental_person = [data.person.class, data.person.age, data.person.name, data.person.parent_permission]
+      rental_book = [data.book.title, data.book.author]
+      rental_data = [data.date, rental_book, rental_person]
+      rental_json = JSON.generate(rental_data)
+      File.write('data/rentals.json', "#{rental_json}\n", mode: 'a')
     end
-    puts 'List saved successfully!'
   end
 
   def save_persons(persons_list)
@@ -21,7 +22,6 @@ module PreserveData
       person_json = JSON.generate(person_data)
       File.write('data/persons.json', "#{person_json}\n", mode: 'a')
     end
-    puts 'Person list saved succsessfully'
   end
 
   def save_books(books_list)
@@ -31,7 +31,6 @@ module PreserveData
       book_json = JSON.generate(book_data)
       File.write('data/books.json', "#{book_json}\n", mode: 'a')
     end
-    puts 'Book list saved successfully'
   end
 
   def read_persons
@@ -67,9 +66,19 @@ module PreserveData
   def read_rental
     return [] unless File.exist?('data/rentals.json') && !File.zero?('data/rentals.json')
 
+    rental_list = []
     File.foreach('data/rentals.json') do |rental_json|
-      rental = JSON.parse(rental_json)
-      puts "Name :#{rental[0]} Book :#{rental[1]} Date :#{rental[2]}"
+      rental_data = JSON.parse(rental_json)
+      book = Book.new(rental_data[1][0], rental_data[1][1])
+      case rental_data[2][0]
+      when 'Student'
+        stud = Student.new('None', rental_data[2][1], rental_data[2][2], parent_permission: rental_data[2][3])
+        rental_list.push(Rental.new(rental_data[0], book, stud))
+      when 'Teacher'
+        teach = Teacher.new('None', rental_data[2][1], rental_data[2][2])
+        rental_list.push(Rental.new(rental_data[0], book, teach))
+      end
     end
+    rental_list
   end
 end

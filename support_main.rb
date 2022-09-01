@@ -27,8 +27,9 @@ class Main
     puts '[3] Create a Person'
     puts '[4] Create a Book'
     puts '[5] Create a Rental'
-    puts '[6] List of all Rentals '
-    puts '[7] Exit'
+    puts '[6] List of all Rentals by Person'
+    puts '[7] List of all Rentals'
+    puts '[8] Exit'
     user_choice = gets.chomp
     show_list(user_choice)
   end
@@ -45,12 +46,8 @@ class Main
       show_rental
       main
     when '7'
-      save_books(@books_list)
-      save_persons(@people_list)
-      save_rental(@rental_list)
-      puts '---------------------------------------------'
-      puts 'Good bye!'
-      puts '---------------------------------------------'
+      show_all(@rental_list)
+      main
     else
       add_to_list(user_choice)
     end
@@ -67,6 +64,13 @@ class Main
     when '5'
       add_rental(@books_list, @people_list, @rental_list)
       main
+    when '8'
+      save_books(@books_list)
+      save_persons(@people_list)
+      save_rental(@rental_list)
+      puts '---------------------------------------------'
+      puts 'Good bye!'
+      puts '---------------------------------------------'
     end
   end
 
