@@ -43,12 +43,13 @@ module App
     end
   end
 
-  def filter_by_id(rental_list, id)
+  def filter_by_id(rental_list, name)
     rental_list.each do |rent|
-      next if rent.person.id != id
+      next if rent.person.name != name
 
       puts '---------------------------------------------'
       puts "Date: #{rent.date}"
+      puts "Rented to: #{rent.person.name}"
       puts "Title: #{rent.book.title}"
       puts "Author: #{rent.book.author}"
       puts '---------------------------------------------'
