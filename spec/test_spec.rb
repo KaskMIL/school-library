@@ -45,7 +45,7 @@ describe Student do
   end
 
   it 'Should not return a new Student object' do
-    expect(@student).not_to eql Student
+    expect(@student.class).to eql Student
   end
 end
 
@@ -55,6 +55,23 @@ describe Teacher do
   end
 
   it 'Should not return a new teacher object' do
-    expect(@teacher).not_to eql Teacher
+    expect(@teacher.class).to eql Teacher
+  end
+end
+
+describe Classroom do
+  context 'When testing Classroom class' do
+    before :each do
+      @classroom = Classroom.new('Math')
+      @student = Student.new('', 15, 'Tom')
+    end
+    it 'the student should be assigned to a classroom' do
+      @student.classroom = @classroom
+      expect(@student.classroom.label).to eq 'Math'
+    end
+    it 'The classroom should have a student after get assigned' do
+      @student.classroom = @classroom
+      expect(@classroom.students[0].name).to eq 'Tom'
+    end
   end
 end
