@@ -43,7 +43,7 @@ class Main
       list_of_people(@people_list)
       main
     when '6'
-      show_rental(@rental_list, @people_list)
+      show_rental
       main
     when '7'
       show_all(@rental_list)

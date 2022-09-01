@@ -25,6 +25,11 @@
 - cd school-library
 - Enter the command ruby main.rb
 
+## Testing usage
+
+- Install Rspec gem - gem install rspec
+- In the terminal run: rspec
+
 ## Authors
 
 
