@@ -47,9 +47,14 @@ describe Student do
   it 'Should not return a new Student object' do
     expect(@student).not_to eql Student
   end
+end
 
-  # it 'Should not return a new Student object' do
-  #   student = Student.new
-  #   expect(student).to eq Student
-  # end
+describe Teacher do
+  before :each do
+    @teacher = Teacher.new('Teacher', 20, 'Olaoluwa')
+  end
+
+  it 'Should not return a new teacher object' do
+    expect(@teacher).not_to eql Teacher
+  end
 end
