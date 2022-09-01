@@ -42,7 +42,7 @@ class Main
       list_of_people(@people_list)
       main
     when '6'
-      show_rental(@rental_list, @people_list)
+      show_rental
       main
     when '7'
       save_books(@books_list)
